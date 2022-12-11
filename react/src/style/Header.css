@@ -1,0 +1,37 @@
+.header {
+    display:flex;
+    align-items: center;
+    padding: 20px 40px;
+    background-color:beige;
+}
+.logo {
+    height: 60px;
+    margin-left: 50px;
+
+}
+.nama {
+    font-size: 25px;
+    text-decoration: double;
+    color: #6BBFD1;
+    margin-left: 0px;
+}
+.menu-item {
+    font-weight: 20px;
+    text-decoration: double;
+    color: #6BBFD1;
+    margin-left: 500px;
+    margin-right: 100px;
+}
+.nav{
+    justify-content: space-between;
+    display: flex;
+    padding: 0 1rem;
+    gap: 2rem;
+}
+
+.nav ul{
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
