@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./component/Header";
-import { Route, Routes } from 'react-router-dom'
+import { Form, Route, Routes } from 'react-router-dom'
 import Home from "./component/Home";
 import Login from "./component/Login";
 import Dashboard from "./pages/Dashboard";
@@ -10,9 +10,15 @@ import Petugas from "./pages/Petugas";
 import RiwayatVaksin from "./pages/Riwayat_Vaksin";
 import Timbangan from "./pages/Timbangan";
 import Vaksin from "./pages/Vaksin";
+import FormPetugas from "./Form/FormPetugas";
+import FormImunisasi from "./Form/FormImunisasi";
+import FormVaksin from "./Form/FormVaksin";
+import FormTimbangan from "./Form/FormTimbangan";
+import FormLaporan from "./Form/FormLaporan";
+import FormAnak from "./Form/FormAnak";
+import UpdateLaporan from "./update/UpdateLaporan";
 
 function App() {
-
   return (
     <div>
       <div className="container">
@@ -23,9 +29,18 @@ function App() {
           <Route path="/imunisasi" element={<Imunisasi />}></Route>
           <Route path="/anak" element={<Anak />}></Route>
           <Route path="/petugas" element={<Petugas />}></Route>
-          <Route path="/riwayat_vaksin" element={<RiwayatVaksin />}></Route>
           <Route path="/timbangan" element={<Timbangan />}></Route>
+          <Route path="/riwayat_vaksin" element={<RiwayatVaksin />}></Route>
           <Route path="/vaksin" element={<Vaksin />}></Route>
+          
+          <Route path="/form_petugas" element={<FormPetugas />}></Route>
+          <Route path="/form_imunisasi" element={<FormImunisasi />}></Route>
+          <Route path="/form_vaksin" element={<FormVaksin />}></Route>
+          <Route path="/form_timbangan" element={<FormTimbangan />}></Route>
+          <Route path="/form_laporan" element={<FormLaporan />}></Route>
+          <Route path="/form_anak" element={<FormAnak />}></Route>
+
+          <Route path="/update_laporan/:id" element={<UpdateLaporan />}></Route>          
         </Routes>
       </div>
     </div>

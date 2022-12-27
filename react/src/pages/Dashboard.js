@@ -5,17 +5,12 @@ import '../style/Dashboard.css';
 import HeaderLogin from "../component/Header-Login";
 
 const Dashboard = () => {
-
-
-
     return (
         <div>
             <HeaderLogin />
             <div className="dashboard-card" >
                 <Card details={CardData}/>
             </div>
-
-
         </div>
     )
 }

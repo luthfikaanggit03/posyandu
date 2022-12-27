@@ -1,25 +1,39 @@
-import React from "react";
-import '../style/Header.css';
-import { Link } from "react-router-dom";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const Header = () => {
     return (
-        <div className="header">
-            <div className="nav">
-                <img className="logo" src='images/logo.png'></img>
-                <ul>
-                    <li>
-                        <Link className="nama" to="/">Posyandu Puspita Sari</Link>
-                    </li>
-                    <li>
-                        <Link className="menu-item" to="/login">Login</Link>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-    )
+        <Navbar collapseOnSelect expand="lg" bg="white" >
+          <Container>
+          <Navbar.Brand href="/">
+            <img
+              alt=""
+              src="images/logo.png"
+              width="50"
+              height="50"
+              className="d-inline-bold center"
+            />{' '}
+            Posyandu Puspita Sari
+          </Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="#features"></Nav.Link>
+                <Nav.Link href="#pricing"></Nav.Link>
+                
+              </Nav>
+              <Nav>
+                <Nav.Link href="#deets">More deets</Nav.Link>
+                <Nav.Link eventKey={2} href="#memes">
+                  Dank memes
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+      );
 }
 
-export default Header 
+export default Header;

@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VaksinController;
+use App\Http\Controllers\AnakController;
+use App\Http\Controllers\ImunisasiController;
+use App\Http\Controllers\LaporanVaksinController;
+use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\TimbanganController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+
 

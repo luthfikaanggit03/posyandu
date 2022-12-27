@@ -3,6 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\ImunisasiController;
+use App\Http\Controllers\VaksinController;
+use App\Http\Controllers\AnakController;
+use App\Http\Controllers\LaporanVaksinController;
+use App\Http\Controllers\TimbanganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +25,42 @@ Route::middleware('auth:sanctum')->post('/user', function (Request $request) {
     return $request->user();
 });
 
+//API PETUGAS
+Route::post('formpetugas', [PetugasController::class, 'addPetugas']);
+Route::get('index', [PetugasController::class, 'index']);
+Route::delete('deletepetugas/{id}', [PetugasController::class, 'delete']);
+Route::get('petugas/{id}', [PetugasController::class, 'getPetugas']);
 
-Route::group(['/middleware'=>'/api'], function(){
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::post('/me', [AuthController::class, 'me']);
-});
+//API IMUNISASI
+Route::get('imunisasi', [ImunisasiController::class, 'imunisasi']);
+Route::post('formimunisasi', [ImunisasiController::class, 'addImunisasi']);
+Route::delete('deleteimunisasi/{id}', [ImunisasiController::class, 'delete']);
+Route::get('imunisasi/{id}', [ImunisasiController::class, 'getImunisasi']);
+
+//API VAKSIN
+Route::get('vaksin', [VaksinController::class, 'vaksin']);
+Route::post('formvaksin', [VaksinController::class, 'addVaksin']);
+Route::delete('deletevaksin/{id}', [VaksinController::class, 'delete']);
+Route::get('vaksin/{id}', [VaksinController::class, 'getVaksin']);
+
+//API ANAK
+Route::get('anak', [AnakController::class, 'anak']);
+Route::post('formanak', [AnakController::class, 'addAnak']);
+Route::delete('deleteanak/{id}', [AnakController::class, 'delete']);
+Route::get('anak/{id}', [AnakController::class, 'getAnak']);
+
+//API LAPORAN VAKSIN
+Route::get('laporan_vaksin', [LaporanVaksinController::class, 'laporanVaksin']);
+Route::post('formlaporan', [LaporanVaksinController::class, 'addLaporan']);
+Route::delete('deletelaporan/{id}', [LaporanVaksinController::class, 'delete']);
+Route::get('laporan_vaksin/{id}', [LaporanVaksinController::class, 'getLaporan']);
+
+//API TIMBANGAN
+Route::get('timbangan', [TimbanganController::class, 'timbangan']);
+Route::post('formtimbangan', [TimbanganController::class, 'addTimbangan']);
+Route::delete('deletetimbangan/{id}', [TimbanganController::class, 'delete']);
+Route::get('timbangan/{id}', [TimbanganController::class, 'getTimbangan']);
+
+
+
     

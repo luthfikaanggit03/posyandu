@@ -1,5 +1,3 @@
-import React from "react";
-import Header from "../component/Header";
 import suntikan from "../assets/suntikan.png";
 import anak from "../assets/anak.png";
 import imunisasi from "../assets/imunisasi.png";

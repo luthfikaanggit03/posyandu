@@ -1,8 +1,8 @@
 * {
     margin: 0;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
 }
-
 .card {
     border: 1px solid #0994B3;
     box-shadow: 0 0 5px #044a5a;
@@ -43,13 +43,9 @@
     justify-content: center;
 }
 .dashboard-card {
-    width: 80%;
-    text-align: center;
-    margin-left: 10%;
+    width: 100%;
+    text-align: center;   
 }
 .dashboard-card > .card {
     display: inline-block;
-}
-.container {
-    
 }
