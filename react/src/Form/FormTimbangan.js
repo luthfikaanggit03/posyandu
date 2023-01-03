@@ -3,8 +3,7 @@ import HeaderLogin from "../component/Header-Login";
 import '../style/Form.css';
 import { useNavigate } from "react-router-dom";
 
-const FormTimbangan = () => {
-    
+function FormTimbangan() {
     const [beratBadan, setBeratBadan] = useState("")
     const [tinggi, setTinggi] = useState("")
     const [tanggal, setTanggal] = useState("")
@@ -27,59 +26,48 @@ const FormTimbangan = () => {
     }
 
     return (
+
         <div>
             <HeaderLogin />
-            <h2>Tambah Data Timbangan</h2>
+            <h2>Tambah Data Timbangan </h2>
             <button onClick={() => navigate('/timbangan')}>Kembali</button>
-            <div className="wrapper">
-                <hr></hr>
-                <form className="form">
-                    <label className="detail">Nama Anak</label>
-                    <input
-                        type='text'
-                        name="anak"
-                        value={anak}
-                        onChange={(e) => setAnak(e.target.value)}></input>
-                    <br></br>
 
-                    <label className="detail">Tanggal Timbang</label>
-                    <input
-                        type='date'
-                        name="tanggal"
-                        value={tanggal}
-                        onChange={(e) => setTanggal(e.target.value)}></input>
-                    <br></br>
+            <div className="col-sm-6 offset-sm-3">
+                <br></br>
+                <label className="detail">Nama Anak : </label>
+                <input type="text"
+                    className="form-control"
+                    placeholder="nama anak"
+                    onChange={(e) => setAnak(e.target.value)}></input> <br></br>
 
-                    <label className="detail">Umur (bulan)</label>
-                    <input
-                        type='text'
-                        name="umur"
-                        value={umur}
-                        onChange={(e) => setUmur(e.target.value)}></input>
-                    <br></br>
-                    
-                    <label className="detail">Berat Badan (kg)</label>
-                    <input
-                        type='text'
-                        name="beratBadan"
-                        value={beratBadan}
-                        onChange={(e) => setBeratBadan(e.target.value)}></input>
-                    <br></br>
+                <label className="detail">Umur Anak (bulan) : </label>
+                <input type="text"
+                    className="form-control"
+                    placeholder="umur anak"
+                    onChange={(e) => setUmur(e.target.value)}></input> <br></br>
 
-                    <label className="detail">Tinggi Badan (cm)</label>
-                    <input
-                        type='text'
-                        name="tinggi"
-                        value={tinggi}
-                        onChange={(e) => setTinggi(e.target.value)}></input>
-                    <br></br>
+                <label className="detail">Tinggi Badan (cm) : </label>
+                <input type="text"
+                    className="form-control"
+                    placeholder="tinggi badan"
+                    onChange={(e) => setTinggi(e.target.value)}></input> <br></br>
 
-                    <button className="form" onClick={addTimbangan} >SUBMIT</button>
-                </form>
+                <label className="detail">Berat Badan (kg) : </label>
+                <input type="text"
+                    className="form-control"
+                    placeholder="berat badan"
+                    onChange={(e) => setBeratBadan(e.target.value)}></input> <br></br>
+
+                <label className="detail">Tanggal Penimbangan : </label>
+                <input type="date"
+                    className="form-control"
+                    placeholder="tinggi badan"
+                    onChange={(e) => setTanggal(e.target.value)}></input> <br></br>
+                <button onClick={addTimbangan}>SUBMIT</button>
             </div>
-            
+
         </div>
     )
 }
-export default FormTimbangan
 
+export default FormTimbangan

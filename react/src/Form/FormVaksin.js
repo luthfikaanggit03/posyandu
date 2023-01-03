@@ -3,8 +3,7 @@ import HeaderLogin from "../component/Header-Login";
 import '../style/Form.css';
 import { useNavigate } from "react-router-dom";
 
-const FormVaksin = () => {
-
+function FormVaksin() {
     const [nama, setNama] = useState("")
     const navigate = useNavigate(); 
 
@@ -19,27 +18,25 @@ const FormVaksin = () => {
     }
 
     return (
+        
         <div>
             <HeaderLogin />
-            <h2>Tambah Data Vaksin</h2>
+            <h2>Tambah Data Vaksin </h2>
             <button onClick={() => navigate('/vaksin')}>Kembali</button>
-            <div className="wrapper">
-                <hr></hr>
-                <form className="form">
-                    <label className="detail">Jenis Vaksin</label>
-                    <input
-                        type='text'
-                        name="nama"
-                        value={nama}
-                        onChange={(e) => setNama(e.target.value)}></input>
-                    <br></br>
+            
+            <div className="col-sm-6 offset-sm-3">
+                <br></br>
+                <label className="detail">Jenis Vaksin : </label> 
+                <input type="text" 
+                className="form-control" 
+                placeholder="jenis vaksin"
+                onChange={(e) => setNama(e.target.value)}></input> <br></br>
 
-                    <button className="form" onClick={addVaksin} >SUBMIT</button>
-                </form>
+                <button onClick={addVaksin}>SUBMIT</button>
             </div>
             
         </div>
     )
 }
-export default FormVaksin
 
+export default FormVaksin

@@ -1,108 +1,75 @@
 import React, { useEffect, useState, Fragment } from "react";
 import HeaderLogin from "../component/Header-Login";
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import DataTable from 'react-data-table-component';
 import { useNavigate } from "react-router-dom";
+import Table from 'react-bootstrap/Table';
+import '../style/button.css';
 
-const Petugas = () => {
-
-    const [petugas, setPetugas] = useState([]);
-    const [filter, setFilter] = useState([]);
+function Petugas() {
     const [data, setData] = useState([]);
     const navigate = useNavigate();
 
-    const columns = [
-        {
-            name: "ID",
-            selector: (row) => row.id
-        },
-        {
-            name: "Nama Petugas",
-            selector: (row) => row.nama
-        },
-        {
-            name: "Tempat Lahir",
-            selector: (row) => row.tempat_lahir
-        },
-        {
-            name: "Tanggal Lahir",
-            selector: (row) => row.tanggal_lahir
-        },
-        {
-            name: "Jabatan",
-            selector: (row) => row.jabatan
-        },
-        {
-            name: "Jenis Kelamin",
-            selector: (row) => row.jenis_kelamin
-        },
-        {
-            name: "No Telp",
-            selector: (row) => row.no_telp
-        },
-        {
-            name: "Status",
-            selector: (row) => row.status
-        },
-        {
-            name:'Actions',
-            cell: (row) => <button className="btn btn-primary" onClick={() => alert(row.id)}>EDIT</button> 
-        },
-        {
-            name:'Actions',
-            cell: (row) => <button className="btn btn-danger" onClick={() => deletePetugas(row.id)}>DELETE</button> 
-        }
-    ]
-
-    async function deletePetugas(id){
-        let result = await fetch("http://localhost:8000/api/deletepetugas/"+id, {
-            method:'DELETE'
-        });
-        result=await result.json();
-        console.warn(result)
-    }
-
-    useEffect(() => {
-        async function getPetugas() {
-            try {
-                const petugas = await axios.get("http://localhost:8000/api/index")
-                console.log(petugas.data)
-                setPetugas(petugas.data)
-                setFilter(filter.data)
-            } catch {
-                console.error();
-            }
-        }
-        getPetugas()
+    useEffect( () => {
+        getData()
     }, [])
 
-    async function pencarian(key){
-        console.warn(key)
-
-        let result = await fetch ("http://localhost:8000/api/search/"+key);
-        result=await result.json();
-        console.warn(result)
+    async function getData() {
+        let result = await fetch('http://localhost:8000/api/index');
+        result = await result.json();
         setData(result)
+        console.warn("data", data);
+    }
+
+    async function deleteOperation(id){
+        let result = await fetch("http://localhost:8000/api/deletepetugas/"+id, {
+            method: 'DELETE'
+        });
+        result= await result.json();
+        console.warn(result);
+        alert("Data berhasil dihapus");
+        getData();
     }
 
     return (
         <div>
             <HeaderLogin />
+            <h2> DATA PETUGAS</h2>
+            <button type="button" onClick={() => navigate('/form_petugas')}>Tambah Data</button>
             <br></br>
-            <div className="title">
-                <h1>Data Petugas</h1>
-            </div>
-            <div className="tambah">
-                <button type="button" onClick={() => navigate('/form_petugas')} >Tambah Data</button>
-            </div>
-            <DataTable columns={columns} data={petugas}
-            pagination
-            highlightOnHover
-            subHeader
-            
-             />
+            <Table striped>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama Petugas</th>
+                        <th>Tempat Lahir</th>
+                        <th>Tanggal Lahir</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Jabatan</th>
+                        <th>No Telp</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        data.map((item) => 
+                        <tr>
+                            <td>{item.id}</td>
+                            <td>{item.nama}</td>
+                            <td>{item.tempat_lahir}</td>
+                            <td>{item.tanggal_lahir}</td>
+                            <td>{item.jenis_kelamin}</td>
+                            <td>{item.jabatan}</td>
+                            <td>{item.no_telp}</td>
+                            <td>{item.status}</td>
+                            <td><span onClick={() => {deleteOperation(item.id)}} className="delete">DELETE</span></td>
+                        </tr>)
+                    }
+                </tbody>
+            </Table>
         </div>
     )
 }

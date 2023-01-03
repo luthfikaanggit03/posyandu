@@ -17,6 +17,7 @@ import FormTimbangan from "./Form/FormTimbangan";
 import FormLaporan from "./Form/FormLaporan";
 import FormAnak from "./Form/FormAnak";
 import UpdateLaporan from "./update/UpdateLaporan";
+import UpdateVaksin from "./update/UpdateVaksin";
 
 function App() {
   return (
@@ -40,7 +41,8 @@ function App() {
           <Route path="/form_laporan" element={<FormLaporan />}></Route>
           <Route path="/form_anak" element={<FormAnak />}></Route>
 
-          <Route path="/update_laporan/:id" element={<UpdateLaporan />}></Route>          
+          <Route path="/update_laporan/:id" element={<UpdateLaporan />}></Route>  
+          <Route path="/update_vaksin/:id" element={<UpdateVaksin />}></Route>
         </Routes>
       </div>
     </div>

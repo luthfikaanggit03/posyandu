@@ -1,0 +1,15 @@
+.delete {
+    background-color: rgb(214, 24, 24);
+    color: white;
+    padding: 6px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit {
+    background-color: rgb(24, 154, 214);
+    color: white;
+    padding: 6px;
+    border-radius: 5px;
+    cursor: pointer;
+}

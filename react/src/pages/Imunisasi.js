@@ -1,93 +1,68 @@
 import React, { useEffect, useState, Fragment } from "react";
 import HeaderLogin from "../component/Header-Login";
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import DataTable from 'react-data-table-component';
 import { useNavigate } from "react-router-dom";
+import Table from 'react-bootstrap/Table';
+import '../style/button.css';
 
-const Imunisasi = () => {
-
-    const [imunisasi, setImunisasi] = useState([]);
-    const [search, setSearch] = useState([]);
-    const [filter, setFilter] = useState([]);
+function Imunisasi() {
+    const [data, setData] = useState([]);
     const navigate = useNavigate();
 
-    const columns = [
-        {
-            name: "ID",
-            selector: (row) => row.id
-        },
-        {
-            name: "Jenis Imunisasi",
-            selector: (row) => row.jenis
-        },
-        {
-            name: "Tanggal Imunisasi",
-            selector: (row) => row.tanggal
-        },
-        {
-            name: "Nama Anak",
-            selector: (row) => row.anak
-        },
-        {
-            name: "Nama Petugas",
-            selector: (row) => row.petugas
-        },
-        {
-            name:'Actions',
-            cell: (row) => <button className="btn btn-primary" onClick={() => alert(row.id)}>EDIT</button> 
-        },
-        {
-            name:'Actions',
-            cell: (row) => <button className="btn btn-danger" onClick={() => deleteImunisasi(row.id)}>DELETE</button> 
-        }
-    ]
-
-    async function deleteImunisasi(id){
-        let result = await fetch("http://localhost:8000/api/deleteimunisasi/"+id, {
-            method:'DELETE'
-        });
-        result=await result.json();
-        console.warn(result)
-    }
-
     useEffect(() => {
-        async function getImunisasi() {
-            try {
-                const imunisasi = await axios.get("http://localhost:8000/api/imunisasi")
-                console.log(imunisasi.data)
-                setImunisasi(imunisasi.data)
-                setFilter(filter.data)
-            } catch {
-                console.error();
-            }
-        }
-        getImunisasi()
+        getData()
     }, [])
 
-    useEffect(() => {
-        const result = imunisasi.filter(imunisasis => {
-            return imunisasis.nama.toLowerCase().match(search.toLowerCase());
-        })
+    async function getData() {
+        let result = await fetch('http://localhost:8000/api/imunisasi');
+        result = await result.json();
+        setData(result)
+        console.warn("data", data);
+    }
 
-        setFilter(result)
-    }, [search])
+    async function deleteOperation(id){
+        let result = await fetch("http://localhost:8000/api/deleteimunisasi/"+id, {
+            method: 'DELETE'
+        });
+        result= await result.json();
+        console.warn(result);
+        alert("Data berhasil dihapus");
+        getData();
+    }
 
     return (
         <div>
             <HeaderLogin />
-            <div className="title">
-                <h1>Data Imunisasi</h1>
-            </div>
-            <div className="tambah">
-            <button type="button" onClick={() => navigate('/form_imunisasi')} >Tambah Data</button>
-            </div>
-            <DataTable columns={columns} data={imunisasi}
-            pagination
-            highlightOnHover
-            subHeader
-             />
+            <h2> DATA IMUNISASI</h2>
+            <button type="button" onClick={() => navigate('/form_imunisasi')}>Tambah Data</button>
+            <br></br>
+            <Table striped>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Jenis Imunisasi</th>
+                        <th>Nama Anak</th>
+                        <th>Nama Petugas</th>
+                        <th>Tanggal Layanan</th>
+                        <th>Actions</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        data.map((item) => 
+                        <tr>
+                            <td>{item.id}</td>
+                            <td>{item.jenis}</td>
+                            <td>{item.anak}</td>
+                            <td>{item.petugas}</td>
+                            <td><span onClick={() => {deleteOperation(item.id)}} className="delete">DELETE</span></td>  
+                        </tr>)
+                    }
+                </tbody>
+            </Table>
         </div>
     )
 }

@@ -3,8 +3,7 @@ import HeaderLogin from "../component/Header-Login";
 import '../style/Form.css';
 import { useNavigate } from "react-router-dom";
 
-const FormImunisasi = () => {
-
+function FormImunisasi() {
     const [id, setID] = useState("")
     const [jenis, setJenis] = useState("")
     const [tanggal, setTanggal] = useState("")
@@ -26,51 +25,43 @@ const FormImunisasi = () => {
     }
 
     return (
+
         <div>
             <HeaderLogin />
-            <h2>Tambah Data Imunisasi</h2>
+            <h2>Tambah Data Imunisasi </h2>
             <button onClick={() => navigate('/imunisasi')}>Kembali</button>
-            <div className="wrapper">
-                <hr></hr>
-                <form className="form">
-                    <label className="detail">Jenis Imunisasi</label>
-                    <input
-                        type='text'
-                        name="jenis"
-                        value={jenis}
-                        onChange={(e) => setJenis(e.target.value)}></input>
-                    <br></br>
 
-                    <label className="detail">Tanggal Imunisasi</label>
-                    <input
-                        type='date'
-                        name="tanggal"
-                        value={tanggal}
-                        onChange={(e) => setTanggal(e.target.value)}></input>
-                    <br></br>
-                    
-                    <label className="detail">Nama Anak</label>
-                    <input
-                        type='text'
-                        name="anak"
-                        value={anak}
-                        onChange={(e) => setAnak(e.target.value)}></input>
-                    <br></br>
+            <div className="col-sm-6 offset-sm-3">
+                <br></br>
+                <label className="detail">Jenis Imunisasi : </label>
+                <input type="text"
+                    className="form-control"
+                    placeholder="jenis imunisasi"
+                    onChange={(e) => setJenis(e.target.value)}></input> <br></br>
 
-                    <label className="detail">Nama Petugas</label>
-                    <input
-                        type='text'
-                        name="petugas"
-                        value={petugas}
-                        onChange={(e) => setPetugas(e.target.value)}></input>
-                    <br></br>
+                <label className="detail">Nama Anak : </label>
+                <input type="text"
+                    className="form-control"
+                    placeholder="nama anak"
+                    onChange={(e) => setAnak(e.target.value)}></input> <br></br>
 
-                    <button className="form" onClick={addImunisasi} >SUBMIT</button>
-                </form>
+                <label className="detail">Nama Peugas : </label>
+                <input type="text"
+                    className="form-control"
+                    placeholder="nama petugas"
+                    onChange={(e) => setPetugas(e.target.value)}></input> <br></br>
+
+                <label className="detail">Tanggal Layanan : </label>
+                <input type="date"
+                    className="form-control"
+                    placeholder="tanggal layanan"
+                    onChange={(e) => setTanggal(e.target.value)}></input> <br></br>
+
+                <button onClick={addImunisasi}>SUBMIT</button>
             </div>
-            
+
         </div>
     )
 }
-export default FormImunisasi
 
+export default FormImunisasi

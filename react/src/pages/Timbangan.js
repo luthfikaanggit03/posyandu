@@ -1,93 +1,72 @@
 import React, { useEffect, useState, Fragment } from "react";
 import HeaderLogin from "../component/Header-Login";
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import DataTable from 'react-data-table-component';
 import { useNavigate } from "react-router-dom";
+import Table from 'react-bootstrap/Table';
 
-const Timbangan = () => {
-
-    const [timbangan, setTimbangan] = useState([]);
-    const [search, setSearch] = useState([]);
-    const [filter, setFilter] = useState([]);
+function Vaksin() {
+    const [data, setData] = useState([]);
     const navigate = useNavigate();
 
-    const columns = [
-        {
-            name: "ID",
-            selector: (row) => row.id
-        },
-        {
-            name: "Tanggal Penimbangan",
-            selector: (row) => row.tanggal
-        },
-        {
-            name: "Nama Anak",
-            selector: (row) => row.anak
-        },
-        {
-            name: "Umur (bulan)",
-            selector: (row) => row.umur
-        },
-        {
-            name: "Berat Badan (kg)",
-            selector: (row) => row.beratBadan
-        },
-        {
-            name: "Tinggi Badan (cm)",
-            selector: (row) => row.tinggi
-        },
-        {
-            name:'Actions',
-            cell: (row) => <button className="btn btn-primary" onClick={() => alert(row.id)}>EDIT</button> 
-        },
-        {
-            name:'Actions',
-            cell: (row) => <button className="btn btn-danger" onClick={() => alert(row.id)}>DELETE</button> 
-        }
-    ]
-
-    const handleDelete = () => {};
-
     useEffect(() => {
-        async function getTimbangan() {
-            try {
-                const timbangan = await axios.get("http://localhost:8000/api/timbangan")
-                console.log(timbangan.data)
-                setTimbangan(timbangan.data)
-                setFilter(filter.data)
-            } catch {
-                console.error();
-            }
-        }
-        getTimbangan()
+        getData()
     }, [])
 
-    useEffect(() => {
-        const result = timbangan.filter(timbangans => {
-            return timbangans.nama.toLowerCase().match(search.toLowerCase());
-        })
+    async function getData() {
+        let result = await fetch('http://localhost:8000/api/timbangan');
+        result = await result.json();
+        setData(result)
+        console.warn("data", data);
+    }
 
-        setFilter(result)
-    }, [search])
-
+    async function deleteOperation(id){
+        let result = await fetch("http://localhost:8000/api/deletetimbangan/"+id, {
+            method: 'DELETE'
+        });
+        result= await result.json();
+        console.warn(result);
+        alert("Data berhasil dihapus");
+        getData();
+    }
+    
     return (
         <div>
             <HeaderLogin />
-            <div className="title">
-                <h1>Data Timbangan</h1>
-            </div>
-            <div className="tambah">
-            <button type="button" onClick={() => navigate('/form_timbangan')} >Tambah Data</button>
-            </div>
-            <DataTable columns={columns} data={timbangan}
-            pagination
-            highlightOnHover
-            subHeader
-             />
+            <h2> DATA TIMBANGAN</h2>
+            <button type="button" onClick={() => navigate('/form_timbangan')}>Tambah Data</button>
+            <br></br>
+            <Table striped>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama Anak</th>
+                        <th>Umur Anak (bulan)</th>
+                        <th>Tinggi Anak (cm)</th>
+                        <th>Berat Anak (kg)</th>
+                        <th>Tanggal Penimbangan</th>
+                        <th>Actions</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        data.map((item) => 
+                        <tr>
+                            <td>{item.id}</td>
+                            <td>{item.anak}</td>
+                            <td>{item.umur}</td>
+                            <td>{item.tinggi}</td>
+                            <td>{item.beratBadan}</td>
+                            <td>{item.tanggal}</td>
+                            <td><span onClick={() => {deleteOperation(item.id)}} className="delete">DELETE</span></td>
+                        </tr>)
+                    }
+                </tbody>
+            </Table>
         </div>
     )
 }
 
-export default Timbangan
+export default Vaksin
