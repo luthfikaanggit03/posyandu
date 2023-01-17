@@ -37,4 +37,23 @@ class TimbanganController extends Controller
     function getTimbangan($id) {
         return timbangan::find($id);
     }
+
+    function updateTimbangan($id, Request $req){
+        //return $req -> input ();
+        //return $id;
+
+        $timbangan = timbangan::find($id);
+        $timbangan->id = $req->input('id');
+        $timbangan->tanggal = $req->input('tanggal');
+        $timbangan->anak = $req->input('anak');
+        $timbangan->umur = $req->input('umur');
+        $timbangan->beratbadan = $req->input('beratBadan');
+        $timbangan->tinggi = $req->input('tinggi');
+        $result = $timbangan->save();
+        if($result){
+            return["result"=>"data berhasil diupdate"];
+        }else{
+            return["result"=>"data gagal diupdate"];
+        }
+    }
 }

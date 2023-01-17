@@ -18,6 +18,10 @@ import FormLaporan from "./Form/FormLaporan";
 import FormAnak from "./Form/FormAnak";
 import UpdateLaporan from "./update/UpdateLaporan";
 import UpdateVaksin from "./update/UpdateVaksin";
+import UpdateImunisasi from "./update/UpdateImunisasi";
+import UpdateAnak from "./update/UpdateAnak";
+import UpdatePetugas from "./update/UpdatePetugas";
+import UpdateTimbangan from "./update/UpdateTimbangan";
 
 function App() {
   return (
@@ -31,7 +35,7 @@ function App() {
           <Route path="/anak" element={<Anak />}></Route>
           <Route path="/petugas" element={<Petugas />}></Route>
           <Route path="/timbangan" element={<Timbangan />}></Route>
-          <Route path="/riwayat_vaksin" element={<RiwayatVaksin />}></Route>
+          <Route path="/riwayat_kunjungan" element={<RiwayatVaksin />}></Route>
           <Route path="/vaksin" element={<Vaksin />}></Route>
           
           <Route path="/form_petugas" element={<FormPetugas />}></Route>
@@ -43,6 +47,10 @@ function App() {
 
           <Route path="/update_laporan/:id" element={<UpdateLaporan />}></Route>  
           <Route path="/update_vaksin/:id" element={<UpdateVaksin />}></Route>
+          <Route path="/update_imunisasi/:id" element={<UpdateImunisasi />}></Route>
+          <Route path="/update_anak/:id" element={<UpdateAnak />}></Route>
+          <Route path="/update_petugas/:id" element={<UpdatePetugas />}></Route>
+          <Route path="/update_timbangan/:id" element={<UpdateTimbangan />}></Route>
         </Routes>
       </div>
     </div>

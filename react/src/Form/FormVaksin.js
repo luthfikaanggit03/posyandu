@@ -4,7 +4,7 @@ import '../style/Form.css';
 import { useNavigate } from "react-router-dom";
 
 function FormVaksin() {
-    const [nama, setNama] = useState("")
+    const [nama, setNama] = useState("");
     const navigate = useNavigate(); 
 
     async function addVaksin() {

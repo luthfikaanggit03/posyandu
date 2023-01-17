@@ -1,14 +1,22 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import HeaderLogin from "../component/Header-Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import DataTable from 'react-data-table-component';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Table from 'react-bootstrap/Table';
+import { useReactToPrint } from 'react-to-print';
 
 function Vaksin() {
     const [data, setData] = useState([]);
     const navigate = useNavigate();
+
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+        documentTitle: "Data Timbangan",
+        onAfterPrint: () => alert('Print Sukses')
+    });
 
     useEffect(() => {
         getData()
@@ -33,6 +41,7 @@ function Vaksin() {
     
     return (
         <div>
+            <div ref={componentRef} style={{ width: '100%', height: window.innerHeight }}>
             <HeaderLogin />
             <h2> DATA TIMBANGAN</h2>
             <button type="button" onClick={() => navigate('/form_timbangan')}>Tambah Data</button>
@@ -61,10 +70,14 @@ function Vaksin() {
                             <td>{item.beratBadan}</td>
                             <td>{item.tanggal}</td>
                             <td><span onClick={() => {deleteOperation(item.id)}} className="delete">DELETE</span></td>
+                            <td><Link to={`/update_timbangan/${item.id}`} className="edit">UPDATE</Link></td> 
                         </tr>)
                     }
                 </tbody>
             </Table>
+            </div>
+            
+            <button onClick={handlePrint}>Print This Out</button>
         </div>
     )
 }

@@ -15,8 +15,8 @@ class LaporanVaksinController extends Controller
         
         $laporan = new laporanVaksin;
         $laporan->id = $req->input('id');
-        $laporan->jenis = $req->input('jenis');
-        $laporan->layanan = $req->input('layanan');
+        $laporan->nama = $req->input('nama');
+        $laporan->pesan = $req->input('pesan');
         $laporan->tanggal = $req->input('tanggal');
         $laporan->save();
 
@@ -34,5 +34,22 @@ class LaporanVaksinController extends Controller
 
     function getLaporan($id) {
         return laporanVaksin::find($id);
+    }
+
+    function updateLaporan($id, Request $req){
+        //return $req -> input ();
+        //return $id;
+
+        $laporan = laporanVaksin::find($id);
+        $laporan->id = $req->input('id');
+        $laporan->nama = $req->input('nama');
+        $laporan->pesan = $req->input('pesan');
+        $laporan->tanggal = $req->input('tanggal');
+        $result = $laporan->save();
+        if($result){
+            return["result"=>"data berhasil diupdate"];
+        }else{
+            return["result"=>"data gagal diupdate"];
+        }
     }
 }

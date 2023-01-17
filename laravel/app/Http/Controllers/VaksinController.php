@@ -30,7 +30,22 @@ class VaksinController extends Controller
         }
     }
 
-    function getVaksin($id) {
+    function getVaksin($id){
         return vaksin::find($id);
+    }
+
+    function updateVaksin($id, Request $req){
+        //return $req -> input ();
+        //return $id;
+
+        $vaksin = vaksin::find($id);
+        $vaksin->id = $req->input('id');
+        $vaksin->nama = $req->input('nama');
+        $result = $vaksin->save();
+        if($result){
+            return["result"=>"data berhasil diupdate"];
+        }else{
+            return["result"=>"data gagal diupdate"];
+        }
     }
 }

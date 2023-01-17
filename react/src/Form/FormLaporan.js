@@ -4,17 +4,17 @@ import '../style/Form.css';
 import { useNavigate } from "react-router-dom";
 
 function FormLaporan() {
-    const [jenis, setJenis] = useState("")
+    const [nama, setNama] = useState("")
     const [tanggal, setTanggal] = useState("")
-    const [layanan, setLayanan] = useState("")
+    const [pesan, setPesan] = useState("")
     const navigate = useNavigate();
 
     async function addLaporan() {
-        console.warn(jenis, tanggal, layanan);
+        console.warn(nama, tanggal, pesan);
         const formData = new FormData();
-        formData.append('jenis', jenis);
+        formData.append('nama', nama);
         formData.append('tanggal', tanggal);
-        formData.append('layanan', layanan);
+        formData.append('pesan', pesan);
         let result = await fetch("http://localhost:8000/api/formlaporan", {
             method: 'POST',
             body: formData
@@ -26,27 +26,27 @@ function FormLaporan() {
         
         <div>
             <HeaderLogin />
-            <h2>Tambah Data Laporan </h2>
-            <button onClick={() => navigate('/riwayat_vaksin')}>Kembali</button>
+            <h2>Tambah Data Kunjungan </h2>
+            <button onClick={() => navigate('/riwayat_kunjungan')}>Kembali</button>
             
             <div className="col-sm-6 offset-sm-3">
                 <br></br>
-                <label className="detail">Jenis Layanan : </label> 
+                <label className="detail">Nama : </label> 
                 <input type="text" 
                 className="form-control" 
-                placeholder="jenis layanan"
-                onChange={(e) => setLayanan(e.target.value)}></input> <br></br>
+                placeholder="nama "
+                onChange={(e) => setNama(e.target.value)}></input> <br></br>
 
-                <label className="detail">Nama Vaksin : </label>
+                <label className="detail">Pesan Kesan : </label>
                 <input type="text" 
                 className="form-control" 
-                placeholder="nama vaksin"
-                onChange={(e) => setJenis(e.target.value)}></input> <br></br>
+                placeholder="pesan kesan"
+                onChange={(e) => setPesan(e.target.value)}></input> <br></br>
 
-                <label className="detail">Tanggal Layanan : </label>
+                <label className="detail">Tanggal Kunjungan : </label>
                 <input type="date" 
                 className="form-control" 
-                placeholder="tanggal layanan" 
+                placeholder="tanggal kunjungan" 
                 onChange={(e) => setTanggal(e.target.value)}></input> <br></br>
 
                 <button onClick={addLaporan}>SUBMIT</button>

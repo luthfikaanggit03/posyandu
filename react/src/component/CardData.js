@@ -33,8 +33,8 @@ const CardData = [
     },
     {
         img:riwayat_vaksin,
-        title:'Riwayat Vaksin',
-        navigate: '/riwayat_vaksin'
+        title:'Kunjungan',
+        navigate: '/riwayat_kunjungan'
     },
 ]
 

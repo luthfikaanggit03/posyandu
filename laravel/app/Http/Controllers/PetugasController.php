@@ -40,7 +40,27 @@ class PetugasController extends Controller
     function getPetugas($id) {
         return petugas::find($id);
     }
-        
+    
+    function updatePetugas($id, Request $req){
+        //return $req -> input ();
+        //return $id;
+
+        $petugas = petugas::find($id);
+        $petugas->id = $req->input('id');
+        $petugas->nama = $req->input('nama');
+        $petugas->tempat_lahir = $req->input('tempat_lahir');
+        $petugas->tanggal_lahir = $req->input('tanggal_lahir');
+        $petugas->jabatan = $req->input('jabatan');
+        $petugas->jenis_kelamin = $req->input('jenis_kelamin');
+        $petugas->no_telp = $req->input('no_telp');
+        $petugas->status = $req->input('status');
+        $result = $petugas->save();
+        if($result){
+            return["result"=>"data berhasil diupdate"];
+        }else{
+            return["result"=>"data gagal diupdate"];
+        }
+    }
         
     
 

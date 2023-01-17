@@ -39,4 +39,26 @@ class AnakController extends Controller
     function getAnak($id) {
         return anak::find($id);
     }
+
+    function updateAnak($id, Request $req){
+        //return $req -> input ();
+        //return $id;
+
+        $anak = anak::find($id);
+        $anak->id = $req->input('id');
+        $anak->nama = $req->input('nama');
+        $anak->nama_ibu = $req->input('nama_ibu');
+        $anak->nama_ayah = $req->input('nama_ayah');
+        $anak->tempat_lahir = $req->input('tempat_lahir');
+        $anak->tanggal_lahir = $req->input('tanggal_lahir');
+        $anak->jenis_kelamin = $req->input('jenis_kelamin');
+        $anak->alamat = $req->input('alamat');
+        $result = $anak->save();
+        if($result){
+            return["result"=>"data berhasil diupdate"];
+        }else{
+            return["result"=>"data gagal diupdate"];
+        }
+    }
+
 }

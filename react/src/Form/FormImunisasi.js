@@ -45,7 +45,7 @@ function FormImunisasi() {
                     placeholder="nama anak"
                     onChange={(e) => setAnak(e.target.value)}></input> <br></br>
 
-                <label className="detail">Nama Peugas : </label>
+                <label className="detail">Nama Petugas : </label>
                 <input type="text"
                     className="form-control"
                     placeholder="nama petugas"
